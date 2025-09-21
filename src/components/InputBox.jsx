@@ -1,10 +1,6 @@
 function InputBox(props) {
     return (
         <div>
-            <label htmlFor={props.htmlFor}>
-                {props.label}
-            </label>
-
             <input className={props.className}
                 type={props.type} 
                 id={props.htmlFor} 

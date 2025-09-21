@@ -6,6 +6,7 @@ import InputBox from './components/InputBox';
 import JobInfo from './components/JobInfo';
 
 function App() {
+  const [showJobs, setShowJobs] = useState(false);
   const [title, setTitle] = useState("");
   const [salary, setSalary] = useState("");
   const [location, setLocation] = useState("");
@@ -15,30 +16,54 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(title, salary, location, company);
   }
 
   return (
-    <div>
+    <div className="App">
       <h1 className="App-header">
         J*b Finding
       </h1>
 
       <form onSubmit={handleSubmit}>
-        <InputBox className="App-inputBox" label="Search Jobs: " htmlFor="job-search" type="text" placeholder="Enter job title" onChange={(e) => setTitle(e.target.value)} />
-        <InputBox className="App-inputBox" label="Salary: " htmlFor="salary-search" type="text" placeholder="Enter salary range" onChange={(e) => setSalary(e.target.value)} />
-        <InputBox className="App-inputBox" label="Location: " htmlFor="location-search" type="text" placeholder="Enter location" onChange={(e) => setLocation(e.target.value)} />
-        <InputBox className="App-inputBox" label="Company: " htmlFor="company-search" type="text" placeholder="Enter company name" onChange={(e) => setCompany(e.target.value)} />
+        <InputBox 
+          className="App-inputBox" 
+          htmlFor="job-search" 
+          type="text" placeholder="Job Role" 
+          onChange={(e) => setTitle(e.target.value)} 
+          />
+        <InputBox
+          className="App-inputBox"
+          htmlFor="salary-search"
+          type="text"
+          placeholder="Salary"
+          onChange={(e) => setSalary(e.target.value)}
+        />
+        <InputBox
+          className="App-inputBox"
+          htmlFor="location-search"
+          type="text"
+          placeholder="Location"
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <InputBox
+          className="App-inputBox"
+          htmlFor="company-search"
+          type="text"
+          placeholder="Company"
+          onChange={(e) => setCompany(e.target.value)}
+        />
 
-        <button className="App-button" type="submit">
+        <button className="App-button" type="submit" onClick={() => setShowJobs(true)}>
           Submit
         </button>
+
       </form>
 
       <div>
-        {Jobs.map((job) => (
+        {showJobs && Jobs.map((job) => (
           <JobInfo
             className="App-jobInfo"
+            id={job.id}
             title={job.title}
             company={job.company_name}
             location={job.job_location}
@@ -48,8 +73,7 @@ function App() {
         ))
         }
       </div>
-
-      <Button className="App-button" name="Load More Jobs" />
+      
     </div>
   )
 }
